@@ -5,7 +5,7 @@
 
 ### Links and Resources
 
-- [submission PR](https://github.com/401-advanced-javascript-fatemaOwedah/Driven-Applications/pull/1)
+- [submission PR](https://github.com/401-advanced-javascript-fatemaOwedah/Driven-Applications/pull/2)
 
 #### Documintation
 
