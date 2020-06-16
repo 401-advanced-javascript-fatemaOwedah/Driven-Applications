@@ -1,16 +1,17 @@
 'use strict';
+require('dotenv').config();
 
 const net = require('net');
 var uuid = require('uuid-random');
 
 const PORT = process.env.PORT || 8000;
 
-
-
 const server = net.createServer();
+
 server.listen(PORT, () => console.log(`Server is up on ${PORT}`));
 
 let socketPool = {};
+
 
 server.on('connection', (socket) => {
 
@@ -34,14 +35,16 @@ server.on('error', (e) => {
 });
 
 function dispatchEvent(buffer) {
-  let message = JSON.parse(buffer.toString().trim());
-  console.log('Event', message);
-  broadcast(message);
+  let obj = JSON.parse(buffer.toString().trim());
+  console.log('Event', obj);
+  broadcast(obj);
 }
 
-function broadcast(msg) {
-  let payload = JSON.stringify(msg);
+function broadcast(obj) {
+  let stringg = JSON.stringify(obj);
   for (let socket in socketPool) {
-    socketPool[socket].write(payload);
+    socketPool[socket].write(stringg);
   }
 }
+
+
