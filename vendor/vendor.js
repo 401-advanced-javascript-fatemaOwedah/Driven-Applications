@@ -19,21 +19,20 @@ client.on('data', function(data){
   }
 });
 
-setInterval(fakeInfo, 5000);
+let setIn = setInterval(fakeInfo, 5000);
 
 function fakeInfo(){
   let obj = {
-    storeName : process.env.STORE_NAME,
+    storeName : process.env.STORE_NAME || 'OpheliaStore',
     orderId : faker.random.uuid(),
     customerName : faker.name.findName(),
     address : faker.address.streetAddress()
   };
-  client.write(JSON.stringify({event:'pickup', payload:obj}));
+  client.write(JSON.stringify({event:'pickup',time:new Date(),payload:obj}));
 }
-
-
 client.on('close', function() {
-  console.log('vendor Connection got closed');
+  clearInterval(setIn);
+  console.log('Vindor Connection got closed');
 });
 client.on('error', (e) => {
   console.log('Driver ERROR', e);
