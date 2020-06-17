@@ -11,7 +11,7 @@ socket.emit('join', storeName);
 
 socket.on('delivered', (payload) =>{
   console.log(`VENDOR: Thank you for delivering ${payload.orderId}`);
-})
+});
 setInterval(fakeInfo, 5000);
 
 function fakeInfo(){
@@ -19,7 +19,7 @@ function fakeInfo(){
     storeName : process.env.STORE_NAME || 'OpheliaStore',
     orderId : faker.random.uuid(),
     customerName : faker.name.findName(),
-    address : faker.address.streetAddress()
+    address : faker.address.streetAddress(),
   };
   socket.emit('pickup', obj);
 }
